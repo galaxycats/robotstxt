@@ -36,7 +36,8 @@ module Robotstxt
 	
 	  u = URI.parse(url)
 	  r = Robotstxt::Parser.new(robot_id)
-		r.allowed?(url) if r.get(u.scheme + '://' + u.host)	
+	  r.get(u.scheme + '://' + u.host)
+		r.allowed?(url)
     
   end
   
