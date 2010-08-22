@@ -153,11 +153,11 @@ module Robotstxt
 					
 					when /^\s*disallow\s*:.+$/
 					r = r.split(':')[1].strip
-					@rules.last[1]<< r.gsub(/\*/,'.+') if r.length > 0 
+					@rules.last[1]<< parse_rule(r) if r.length > 0 
 					
 					when /^\s*allow\s*:.+$/
 					r = r.split(':')[1].strip
-					@rules.last[2]<< r.gsub(/\*/,'.+') if r.length > 0 
+					@rules.last[2]<< parse_rule(r) if r.length > 0 
 					
 					when /^\s*sitemap\s*:.+$/
 					@sitemaps<< r.split(':')[1].strip + ((r.split(':')[2].nil?) ? '' : r.split(':')[2].strip) if r.length > 0  		
@@ -167,6 +167,10 @@ module Robotstxt
 			}
 			
 			
+		end
+		
+		def parse_rule(rule)
+		  rule.gsub(/\*/,'.+').gsub("?", Regexp.escape("?"))
 		end
 		
 	end
