@@ -160,7 +160,7 @@ module Robotstxt
 					@rules.last[2]<< parse_rule(r) if r.length > 0 
 					
 					when /^\s*sitemap\s*:.+$/
-					@sitemaps<< r.split(':')[1].strip + ((r.split(':')[2].nil?) ? '' : r.split(':')[2].strip) if r.length > 0  		
+					@sitemaps<< URI.parse(URI.extract($1)[0]) if ($1.length > 0)
 					
 				end
 				
